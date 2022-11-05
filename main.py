@@ -22,6 +22,7 @@ my_screen.tracer(0)
 my_snake = Snake()
 my_food = Food()
 my_scoreboard = Scoreboard()
+my_scoreboard.retr_highscore()
 my_screen.listen()
 my_screen.onkey(my_snake.up, "Up")
 my_screen.onkey(my_snake.down, "Down")
@@ -41,20 +42,18 @@ while lContinue:
     if my_snake.head.distance(my_food) < 15:
         my_food.refresh()
         my_snake.grow()
-
         my_scoreboard.score()
 
     if my_snake.head.xcor() > 280 or my_snake.head.xcor() < -280 or my_snake.head.ycor() > 280 or my_snake.head.ycor() < -280:
-        lContinue = False
-        my_scoreboard.game_over(1)
+        my_scoreboard.reset()
+        my_snake.reset()
 
     i1 = 0
     for snake in my_snake.snakes[1:]:
         i1 += 1
         if my_snake.head.distance(snake) < 5:
-            print("at segment:", i1)
-            lContinue = False
-            my_scoreboard.game_over(2)
+            my_scoreboard.reset()
+            my_snake.reset()
 
 my_screen.exitonclick()
 

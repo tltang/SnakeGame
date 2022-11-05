@@ -55,3 +55,11 @@ class Snake:
         new_snake.speed("fastest")
         new_snake.goto(self.snakes[-1].position())
         self.snakes.append(new_snake)
+
+    def reset(self):
+        for snake in self.snakes:
+            snake.goto(1000, 1000)
+
+        self.snakes.clear()
+        self.create_snake()
+        self.head = self.snakes[0]
